@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "450642449716",
+    "firebase_url": "https://mad-project-fa20d-default-rtdb.firebaseio.com",
+    "project_id": "mad-project-fa20d",
+    "storage_bucket": "mad-project-fa20d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450642449716:android:721c157f7999b516808161",
+        "android_client_info": {
+          "package_name": "com.example.mad_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450642449716-3klvebokrhbq2ecu7tkdffbd3dobmq7m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mad_project",
+            "certificate_hash": "c38e069ccc43831e24042686883e1ad320208d37"
+          }
+        },
+        {
+          "client_id": "450642449716-bd8mk8jdu59eolbvu3ra18kqsq7hos3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mad_project",
+            "certificate_hash": "0d297f2248846be70797fb73f1a647236542e2a6"
+          }
+        },
+        {
+          "client_id": "450642449716-l92ovb5p8efelqudao6b2csmreulppfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mad_project",
+            "certificate_hash": "2439c8193ff3fb17f6abf6ed3ceab1c40a5023f5"
+          }
+        },
+        {
+          "client_id": "450642449716-6r92bt8flq79lkpa73trc54uoqc4s98k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMXGCyfpM09e8zYi7aDq8KAKTyDaEommg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450642449716-6r92bt8flq79lkpa73trc54uoqc4s98k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450642449716:android:f9085f272944a237808161",
+        "android_client_info": {
+          "package_name": "com.example.suvidha_shopkeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450642449716-6r92bt8flq79lkpa73trc54uoqc4s98k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMXGCyfpM09e8zYi7aDq8KAKTyDaEommg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450642449716-6r92bt8flq79lkpa73trc54uoqc4s98k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
