@@ -29,6 +29,34 @@ class _HomeState extends State<Home> {
     rejectTextController = TextEditingController();
   }
 
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress = "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -188,7 +216,7 @@ class _HomeState extends State<Home> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('Orders',
+                      child: Text('New Orders',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
                     ),
@@ -383,6 +411,323 @@ class _HomeState extends State<Home> {
                                     indent: 10,
                                     endIndent: 10,
                                   )
+                                : Container(),
+                          ],
+                        );
+                      }),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Running Orders',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Divider(
+                          color: Colors.black,
+                          height: 10,
+                          thickness: 2,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Card(
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: current.length,
+                      itemBuilder: (_, index) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+
+                                        Icon(Icons.timelapse_rounded),
+                                        SizedBox(width: 15),
+                                        Text(
+                                            '${DateTime.parse(current[index].requestTime).day}/${DateTime.parse(current[index].requestTime).month}/${DateTime.parse(current[index].requestTime).year}',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w200)),
+                                        SizedBox(width: 10.0),
+                                        Text(
+                                            '${DateTime.parse(current[index].requestTime).hour}:${DateTime.parse(current[index].requestTime).minute}',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w200)),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+
+                                        Icon(Icons.timelapse_rounded),
+                                        SizedBox(width: 15),
+                                        Text(
+                                            '${DateTime.parse(current[index].acceptTime).add(Duration(minutes: current[index].expectedTime)).difference(DateTime.now()).inMinutes} min. left ',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w200)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.person),
+                                  SizedBox(width: 15),
+                                  Text('${current[index].customerName}',
+                                      style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w200)),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.location_on_outlined),
+                                  SizedBox(width: 15),
+                                  Flexible(
+                                      flex: 3,
+                                      child: Text(
+                                          '${current[index].customerAddress}',
+                                          maxLines: 2,
+                                          softWrap: true,
+                                          overflow: TextOverflow.fade,
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.w200))),
+                                ],
+                              ),
+                            ),
+
+                            Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: Column(
+                                children: <Widget>[
+                                  SizedBox(height: 20.0),
+                                  ExpansionTile(
+                                    title: Text(
+                                      "Order Summary",
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    children: [
+                                      ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: current[index]
+                                              .items
+                                              .length,
+                                          itemBuilder: (_, index1) {
+                                            String key = current[index]
+                                                .items
+                                                .keys
+                                                .elementAt(index1)
+                                                .toString();
+                                            return Text(
+                                                '$key -> ${current[index].items[key].toString()}',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                    FontWeight.w200));
+                                          })
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                ElevatedButton(onPressed: (){
+                                  RequestDatabase().orderDelivered(current[index].uid, "STATUS_COMPLETED");
+                                }, child: Text('Order Delivered'),),
+                                SizedBox(width: 10,),
+                                ElevatedButton(onPressed: (){
+                                  RequestDatabase().orderDelivered(current[index].uid, "STATUS_REJECTED");
+                                }, child: Text('Cancel Delivery'),),
+                              ],
+                            ),
+
+                            index != (current.length - 1)
+                                ? Divider(
+                              color: Colors.black,
+                              height: 10,
+                              thickness: 2,
+                              indent: 10,
+                              endIndent: 10,
+                            )
+                                : Container(),
+                          ],
+                        );
+                      }),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Recent Orders',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Divider(
+                          color: Colors.black,
+                          height: 10,
+                          thickness: 2,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Card(
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: history.length,
+                      itemBuilder: (_, index) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+
+                                        Icon(Icons.timelapse_rounded),
+                                        SizedBox(width: 15),
+                                        Text(
+                                            '${DateTime.parse(history[index].requestTime).day}/${DateTime.parse(history[index].requestTime).month}/${DateTime.parse(history[index].requestTime).year}',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w200)),
+                                        SizedBox(width: 10.0),
+                                        Text(
+                                            '${DateTime.parse(history[index].requestTime).hour}:${DateTime.parse(history[index].requestTime).minute}',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w200)),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(history[index].status),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.person),
+                                  SizedBox(width: 15),
+                                  Text('${history[index].customerName}',
+                                      style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w200)),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.location_on_outlined),
+                                  SizedBox(width: 15),
+                                  Flexible(
+                                      flex: 3,
+                                      child: Text(
+                                          '${history[index].customerAddress}',
+                                          maxLines: 2,
+                                          softWrap: true,
+                                          overflow: TextOverflow.fade,
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.w200))),
+                                ],
+                              ),
+                            ),
+
+                            Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: Column(
+                                children: <Widget>[
+                                  SizedBox(height: 20.0),
+                                  ExpansionTile(
+                                    title: Text(
+                                      "Order Summary",
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    children: [
+                                      ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: history[index]
+                                              .items
+                                              .length,
+                                          itemBuilder: (_, index1) {
+                                            String key = history[index]
+                                                .items
+                                                .keys
+                                                .elementAt(index1)
+                                                .toString();
+                                            return Text(
+                                                '$key -> ${history[index].items[key].toString()}',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                    FontWeight.w200));
+                                          })
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            index != (history.length - 1)
+                                ? Divider(
+                              color: Colors.black,
+                              height: 10,
+                              thickness: 2,
+                              indent: 10,
+                              endIndent: 10,
+                            )
                                 : Container(),
                           ],
                         );

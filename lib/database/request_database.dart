@@ -15,6 +15,12 @@ class RequestDatabase{
     });
   }
 
+  Future orderDelivered(String uid,String status)async{
+    await collectionReference.doc(uid).update({
+      "status":status,
+    });
+  }
+
   Future rejectRequest(String uid,String status,String error,String acceptTime)async{
     await collectionReference.doc(uid).update({
       "status":status,
@@ -31,7 +37,7 @@ class RequestDatabase{
           items:Map<String,int>.from(dt["items"]),
           status: dt["status"],
           expectedTime: dt["expectedTime"],
-          acceptTime: dt["acceptedTime"],
+          acceptTime: dt["acceptTime"],
           customerAddress: dt["customerAddress"],
           customerName: dt["customerName"],
           error: dt["error"],
