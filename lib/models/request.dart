@@ -1,7 +1,6 @@
-class Request{
-
+class Request {
   String uid;
-  Map<String,int> items;
+  Map<String, int> items;
   String requestTime;
   String acceptTime;
   int expectedTime; // in minute
@@ -17,16 +16,15 @@ class Request{
     STATUS_REJECTED
    */
 
-  Request({
-    this.uid,
-    this.items,
-    this.requestTime,
-    this.acceptTime,
-    this.expectedTime,
-    this.totalPrice,
-    this.customerName,
-    this.customerAddress,
-    this.status,
-    this.error
-  });
+  Request(
+      {this.uid,
+      this.items,
+      this.requestTime,
+      this.acceptTime,
+      this.expectedTime,
+      this.totalPrice,
+      this.customerName,
+      this.customerAddress,
+      this.status,
+      this.error});
 }

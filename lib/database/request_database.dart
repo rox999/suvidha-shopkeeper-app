@@ -1,40 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:suvidha_shopkeeper/models/request.dart';
 
-class RequestDatabase{
+class RequestDatabase {
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('request');
 
-
-  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('request');
-
-
-  Future acceptRequest(String uid,String status,int expectedTime ,String acceptTime)async{
+  Future acceptRequest(
+      String uid, String status, int expectedTime, String acceptTime) async {
     await collectionReference.doc(uid).update({
-      "status":status,
-      "expectedTime":expectedTime,
-      "acceptTime":acceptTime
+      "status": status,
+      "expectedTime": expectedTime,
+      "acceptTime": acceptTime
     });
   }
 
-  Future orderDelivered(String uid,String status)async{
+  Future orderDelivered(String uid, String status) async {
     await collectionReference.doc(uid).update({
-      "status":status,
+      "status": status,
     });
   }
 
-  Future rejectRequest(String uid,String status,String error,String acceptTime)async{
-    await collectionReference.doc(uid).update({
-      "status":status,
-      "acceptTime":acceptTime,
-      "error":error
-    });
+  Future rejectRequest(
+      String uid, String status, String error, String acceptTime) async {
+    await collectionReference
+        .doc(uid)
+        .update({"status": status, "acceptTime": acceptTime, "error": error});
   }
 
-  List<Request>requestListFromSnap(QuerySnapshot snap){
-    return snap.docs.map((e){
+  List<Request> requestListFromSnap(QuerySnapshot snap) {
+    return snap.docs.map((e) {
       dynamic dt = Map<String, dynamic>.from(e.data());
       return Request(
           uid: dt["uid"],
-          items:Map<String,int>.from(dt["items"]),
+          items: Map<String, int>.from(dt["items"]),
           status: dt["status"],
           expectedTime: dt["expectedTime"],
           acceptTime: dt["acceptTime"],
@@ -42,16 +40,11 @@ class RequestDatabase{
           customerName: dt["customerName"],
           error: dt["error"],
           requestTime: dt["requestTime"],
-          totalPrice: dt["totalPrice"]
-      );
+          totalPrice: dt["totalPrice"]);
     }).toList();
   }
 
-
   Stream<List<Request>> get request {
-    return collectionReference.snapshots()
-        .map(requestListFromSnap);
-
+    return collectionReference.snapshots().map(requestListFromSnap);
   }
-
 }
