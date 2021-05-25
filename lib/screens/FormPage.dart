@@ -120,17 +120,23 @@ class _FormPageState extends State<FormPage> {
                   height: 20,
                 ),
                 Card(
+                    color: Colors.white54,
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.teal[400], width: 2.0),
                         borderRadius: BorderRadius.circular(5.0)),
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Align(
+
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Mobile No. : ${tempShopkeeper.phoneNumber.toString()}",
-                            maxLines: 2,
-                            style: TextStyle(fontSize: 20, letterSpacing: 1.2),
+                          child: Row(
+                            children: [
+
+                              Text("Mobile No. : ${tempShopkeeper.phoneNumber.toString()}",maxLines: 2, style: TextStyle(fontSize: 20,letterSpacing: 1.2), ),
+                              Spacer(flex: 2),
+                              Icon(Icons.edit_off),
+                              Spacer(flex: 1,),
+                            ],
                           )),
                     )),
                 SizedBox(

@@ -52,9 +52,26 @@ class _UserProfileCardState extends State<UserProfileCard> {
                 children: [
                   Switch(
                     onChanged: (val) {
-                      toggleSwitch(val);
-                      ShopkeeperDatabase(uid: widget.shopkeeper.uid)
-                          .updateUserAvail(isSwitched);
+                      showDialog(context: context, builder: (_){
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          title: val ? Text('Do you want to enable online dilevery?') : Text('Do you want to disable online dilevery?'),
+                          actions: [
+                            MaterialButton(onPressed: (){
+                              toggleSwitch(val);
+                              ShopkeeperDatabase(uid: widget.shopkeeper.uid).updateUserAvail(isSwitched);
+                              Navigator.pop(context);
+                            },child: Text('Yes'),color: Colors.teal[300],),
+                            MaterialButton(onPressed: (){
+                              Navigator.pop(context);
+                            },child: Text('No'),color: Colors.teal[300],),
+                          ],
+                        );
+                      });
+                      // toggleSwitch(val);
+                      // ShopkeeperDatabase(uid: shopkeeper.uid).updateUserAvail(isSwitched);
                     },
                     value: isSwitched,
                   ),
@@ -70,12 +87,27 @@ class _UserProfileCardState extends State<UserProfileCard> {
                     },
                   ),
                   IconButton(
-                    icon: Icon(
-                      Icons.logout,
-                      semanticLabel: "sign out",
-                    ),
+                    icon: Icon(Icons.logout,semanticLabel: "sign out",),
                     onPressed: () {
-                      AuthService().signOut();
+                      //AuthService().signOut();
+                      showDialog(context: context, builder: (_){
+                        return AlertDialog(
+                          title: Text('Do you want to Logout?'),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          actions: [
+                            MaterialButton(onPressed: (){
+                              AuthService().signOut();
+                              Navigator.pop(context);
+                            }, child: Text('Yes'),color: Colors.teal[300],),
+                            MaterialButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, child: Text('No'),color: Colors.teal[300],)
+                          ],
+                        );
+                      });
+
                     },
                   ),
                 ],
