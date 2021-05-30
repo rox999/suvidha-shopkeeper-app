@@ -32,7 +32,7 @@ class _NewOrderCardState extends State<NewOrderCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return widget.pendingRequest.length == 0 ? Container(height: 200, child: Center(child: Text('Nothing yet'))) : Card(
       elevation: 2.5,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),

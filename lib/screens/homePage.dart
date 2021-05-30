@@ -93,22 +93,59 @@ class _HomeState extends State<Home> {
                 UserProfileCard(
                   shopkeeper: shopkeeper,
                 ),
-                DividerWithType(
-                  type: "New Orders",
-                ),
-                NewOrderCard(pendingRequest: pendingRequest),
-                DividerWithType(
-                  type: "Running Orders",
-                ),
-                CurrentOrderCard(
-                  current: current,
-                ),
-                DividerWithType(
-                  type: "Recent Orders",
-                ),
-                HistoryCard(
-                  history: history,
-                )
+                DefaultTabController(
+                    length: 3,
+                    initialIndex: 0,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: TabBar(
+                            labelColor: Colors.teal,
+                            unselectedLabelColor: Colors.black,
+                            tabs: [
+                              Tab(text: 'New '),
+                              Tab(text: 'Running ',),
+                              Tab(text: 'Recent '),
+                             // Tab(text: 'Tab 4'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                        height: 500, //height of TabBarView
+                        decoration: BoxDecoration(
+                        border: Border(top: BorderSide(color: Colors.grey, width: 0.5))
+                        ),
+                        child: TabBarView(children: <Widget>[
+                        SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          child: Container(
+                          child: NewOrderCard(pendingRequest: pendingRequest),
+                          ),
+                        ),
+                          SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Container(
+                              child: CurrentOrderCard(
+                                current: current,
+                              ),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Container(
+                              child: HistoryCard(
+                                history: history,
+                              )
+                            ),
+                          ),
+
+
+                        ],
+                      )
+                      ),
+                    ]
+                    )),
+
               ],
             ),
           ),

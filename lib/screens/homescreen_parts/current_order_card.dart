@@ -13,7 +13,7 @@ class CurrentOrderCard extends StatefulWidget {
 class _CurrentOrderCardState extends State<CurrentOrderCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return widget.current.length == 0 ? Container(height: 200, child: Center(child: Text('Nothing yet'))) : Card(
       elevation: 2.5,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),

@@ -12,7 +12,7 @@ class HistoryCard extends StatefulWidget {
 class _HistoryCardState extends State<HistoryCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return widget.history.length == 0 ? Container(height: 200, child: Center(child: Text('Nothing yet'))) : Card(
       elevation: 2.5,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
