@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                       'SHOPKEEPER',
                       style: TextStyle(
                         fontFamily: 'ReggaeOne',
-                        fontSize: 25,
+                        fontSize: 24,
                         //color: Colors.white,
                       ),
                     ),
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.tealAccent[100],
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
-                      elevation: 8.0,
+                      elevation: 6.0,
                       //color: Color(0xfff3f6f3),
                       margin: EdgeInsets.all(25.0),
                       child: Container(
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                 icon: Text(
                                   "+91",
                                   style: TextStyle(
-                                    letterSpacing: 4.0,
+                                    letterSpacing: 3.0,
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
                                   ),
