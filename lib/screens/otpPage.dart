@@ -100,14 +100,6 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
         ? Scaffold(
             body: Stack(
               children: [
-                // Container(
-                //   padding: EdgeInsets.all(25.0),
-                //   decoration: BoxDecoration(
-                //       image: DecorationImage(
-                //         image: AssetImage('assets/madOtp.png'),
-                //         fit: BoxFit.cover,
-                //       )),
-                // ),
                 Center(
                   child: SingleChildScrollView(
                     physics: ScrollPhysics(),
@@ -119,9 +111,8 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                           style: TextStyle(
                             fontFamily: 'ReggaeOne',
                             fontWeight: FontWeight.bold,
-                            fontSize: 40,
-                            // fontFamily:'dsc',
-                            //color: Colors.white,
+                            fontSize: 45,
+                            
                           ),
                         ),
                         Text(
@@ -138,7 +129,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                           height: 50,
                         ),
                         Card(
-                          color: Colors.tealAccent[100],
+                          color: Colors.tealAccent[200],
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0)),
                           margin: EdgeInsets.all(15.0),
@@ -254,7 +245,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                     top: 20.0,
-                                    bottom: 10.0,
+                                    bottom: 10.2,
                                     left: 20,
                                   ),
                                   child: RichText(
