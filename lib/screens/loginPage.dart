@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
             decoration: BoxDecoration(),
           ),
           Container(
-            color: Colors.white54,
+            color: Colors.white54,// colour setted to white
             child: Center(
               child: SingleChildScrollView(
                 physics: ScrollPhysics(),
@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
                       'SUVIDHA',
                       style: TextStyle(
                         fontFamily: 'ReggaeOne',
-                        fontSize: 45,
+                        fontSize: 44,
                         //color: Colors.white,
                         fontWeight: FontWeight.w900,
                       ),
