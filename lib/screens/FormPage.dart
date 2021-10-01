@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:suvidha_shopkeeper/database/shopkeeper_database.dart';
 import 'package:suvidha_shopkeeper/models/constants.dart';
 import 'package:suvidha_shopkeeper/models/shopkeeper.dart';
-
+//formPage
 class FormPage extends StatefulWidget {
   Shopkeeper shopkeeper = Shopkeeper();
   FormPage({this.shopkeeper});
