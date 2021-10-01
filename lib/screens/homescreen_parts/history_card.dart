@@ -43,11 +43,11 @@ class _HistoryCardState extends State<HistoryCard> {
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.w200)),
-                            SizedBox(width: 10.0),
+                            SizedBox(width: 12.0),
                             Text(
                                 '${DateTime.parse(widget.history[index].requestTime).hour}:${DateTime.parse(widget.history[index].requestTime).minute}',
                                 style: TextStyle(
-                                    fontSize: 15.0,
+                                    fontSize: 18.0,
                                     fontWeight: FontWeight.w200)),
                           ],
                         ),
@@ -117,14 +117,14 @@ class _HistoryCardState extends State<HistoryCard> {
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'Items',
+                                    'Items ',
                                     style:
                                         TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'Quantity',
+                                    'Quantity ',
                                     style:
                                         TextStyle(fontStyle: FontStyle.italic),
                                   ),
@@ -147,8 +147,8 @@ class _HistoryCardState extends State<HistoryCard> {
                 index != (widget.history.length - 1)
                     ? Divider(
                         color: Colors.black,
-                        height: 10,
-                        thickness: 2,
+                        height: 12,
+                        thickness: 3,
                         indent: 10,
                         endIndent: 10,
                       )
