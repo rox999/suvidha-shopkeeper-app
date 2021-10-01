@@ -105,15 +105,14 @@ class _HomeState extends State<Home> {
                             tabs: [
                               Tab(text: 'New '),
                               Tab(text: 'Running ',),
-                              Tab(text: 'Recent '),
-                             // Tab(text: 'Tab 4'),
+                              Tab(text: 'Recent ')
                             ],
                           ),
                         ),
                         Container(
-                        height: 500, //height of TabBarView
+                        height: 500, 
                         decoration: BoxDecoration(
-                        border: Border(top: BorderSide(color: Colors.grey, width: 0.5))
+                        border: Border(top: BorderSide(color: Colors.black, width: 0.6))
                         ),
                         child: TabBarView(children: <Widget>[
                         SingleChildScrollView(
