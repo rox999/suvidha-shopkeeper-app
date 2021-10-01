@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suvidha_shopkeeper/screens/otpPage.dart';
-
+//login page
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
