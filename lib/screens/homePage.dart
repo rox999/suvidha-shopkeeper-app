@@ -10,7 +10,7 @@ import 'package:suvidha_shopkeeper/screens/homescreen_parts/history_card.dart';
 import 'package:suvidha_shopkeeper/screens/homescreen_parts/new_order_card.dart';
 import 'package:suvidha_shopkeeper/screens/homescreen_parts/user_profile_card.dart';
 import 'FormPage.dart';
-
+//home page
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
