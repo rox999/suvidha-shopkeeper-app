@@ -36,7 +36,7 @@ class _FormPageState extends State<FormPage> {
               key: _formKey,
               child: Column(children: [
                 Text(
-                  'Update Shop Info:',
+                  'Update Shop Information:',
                   style: TextStyle(
                       fontFamily: "ReggaeOne",
                       fontWeight: FontWeight.w900,
@@ -45,7 +45,7 @@ class _FormPageState extends State<FormPage> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Divider(
-                    color: Colors.teal[500],
+                    color: Colors.teal[700],
                     height: 10,
                     thickness: 2,
                     indent: 10,
@@ -57,7 +57,7 @@ class _FormPageState extends State<FormPage> {
                 ),
                 TextFormField(
                   validator: (val) {
-                    if (val.isEmpty) return "please enter a valid shop name";
+                    if (val.isEmpty) return "Please enter a valid shop name";
                     return null;
                   },
                   initialValue: widget.shopkeeper.shopName != null
