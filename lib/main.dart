@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
           fontFamily: "BreeSerif",
           iconTheme: IconThemeData(
-            color: Colors.teal[700],
+            color: Colors.teal[600],
           )),
       home: HomePage(),
     );
